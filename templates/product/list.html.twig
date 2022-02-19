@@ -40,7 +40,7 @@
     <th scope="col">Prix</th>
     <th scope="col">modifier</th>
     <th scope="col">Delete </th>
-    <th scope="col">img </th>
+    <th scope="col">image </th>
 
   </tr>
   </thead>
@@ -50,15 +50,15 @@
   {% for item in form %}
   <tr>
   
-  <th scope="row">{{item.id}}</th>
+  <th scope="row">{{item.idproduit}}</th>
   
     <td>{{item.description}}</td>
-    <td>{{item.nomproduit}}</td>
+    <td>{{item.nomprod}}</td>
     <td>{{item.Prix}}</td>
 
 
-    <td><a href="{{ path('update_product',{'id':item.id})  }}"> Modifier</a>  </td>
-    <td><a href="{{ path('sup_product',{'id':item.id})  }}"> Delete</a>  </td>
+    <td><a href="{{ path('update_product',{'id':item.idproduit})  }}"> Modifier</a>  </td>
+    <td><a href="{{ path('sup_product',{'id':item.idproduit})  }}"> Delete</a>  </td>
     <td><img src="{{asset('ulpoads/') ~ item.image}}"  width="50" height="50"></td>
    
 </tr>

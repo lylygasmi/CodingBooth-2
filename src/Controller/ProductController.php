@@ -5,6 +5,10 @@ namespace App\Controller;
 use App\Entity\Produit;
 use App\Form\ProductType;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
+use Symfony\Component\Form\Extension\Core\Type\FileType;
+use Symfony\Component\Form\Extension\Core\Type\MoneyType;
+use Symfony\Component\Form\Extension\Core\Type\SubmitType;
+use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
@@ -17,11 +21,11 @@ class ProductController extends AbstractController
     public function listadmin(): Response
     {
         $form = $this->getDoctrine()
-        ->getRepository(Product::class)
+        ->getRepository(Produit::class)
         ->findAll();
 
 
-        return $this->render('Product/list.html.twig', [
+        return $this->render('product/list.html.twig', [
             'form' => $form,
         ]);
     }
@@ -112,14 +116,19 @@ class ProductController extends AbstractController
 
 
         $form = $this->createformbuilder($product)
-        ->add('prix',IntegerType::class)
-            ->add('description',TextType::class)
+        ->add('nomprod',TextType::class)
+        ->add('description',TextType::class)
+        ->add('prix',MoneyType::class)
+        ->add('type_produit',TextType::class)
+        
+       
             ->add('image',FileType::class,[
                 'mapped'=> false,
                 'label'=>' please upload a image'
-
-            ])
-            ->add('Edit',SubmitType::class)
+                
+                ])
+                ->add('edit',SubmitType::class)
+        
 
         ->getForm();
         $form->handleRequest($request);
